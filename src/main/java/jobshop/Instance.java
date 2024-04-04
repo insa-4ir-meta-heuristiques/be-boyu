@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 /** Represents an instance of a JobShop problem. */
 public final class Instance {
 
+    public static Object duration;
+
     /** Name of the instance. Same as the filename from which the instance is loaded. */
     public final String name;
 
