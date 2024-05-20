@@ -1,0 +1,11 @@
+jobshop/encodings/Encoding.class
+jobshop/encodings/ResourceOrder.class
+jobshop/Instance.class
+jobshop/solvers/neighborhood/Nowicki$Block.class
+jobshop/encodings/Task.class
+jobshop/solvers/neighborhood/Nowicki.class
+jobshop/solvers/neighborhood/Neighborhood.class
+jobshop/solvers/GreedySolver$1.class
+jobshop/encodings/Schedule.class
+jobshop/BestKnownResults.class
+jobshop/solvers/neighborhood/Nowicki$Swap.class

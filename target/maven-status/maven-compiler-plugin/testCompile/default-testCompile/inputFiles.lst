@@ -1,0 +1,5 @@
+/home/bfu/4MIC/Metah/code-template-main/src/test/java/jobshop/encodings/ManualEncodingTests.java
+/home/bfu/4MIC/Metah/code-template-main/src/test/java/jobshop/encodings/DescentSolverTests.java
+/home/bfu/4MIC/Metah/code-template-main/src/test/java/jobshop/ParsingTests.java
+/home/bfu/4MIC/Metah/code-template-main/src/test/java/jobshop/encodings/GreedySolverTests.java
+/home/bfu/4MIC/Metah/code-template-main/src/test/java/jobshop/encodings/BasicSolverTests.java
