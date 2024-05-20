@@ -1,6 +1,7 @@
 package jobshop.solvers.neighborhood;
 
-import jobshop.encodings.ResourceOrder;
+//import jobshop.Instance;
+import jobshop.encodings.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +88,9 @@ public class Nowicki extends Neighborhood {
          *  The original ResourceOrder MUST NOT be modified by this operation.
          */
         public ResourceOrder generateFrom(ResourceOrder original) {
-            throw new UnsupportedOperationException();
+            ResourceOrder result = original;
+            result.swapTasks(machine,t1,t2);
+            return result;
         }
 
         @Override
@@ -125,13 +128,51 @@ public class Nowicki extends Neighborhood {
     }
 
     /** Returns a list of all the blocks of the critical path. */
-    List<Block> blocksOfCriticalPath(ResourceOrder order) {
-        throw new UnsupportedOperationException();
+    public List<Block> blocksOfCriticalPath(ResourceOrder order) {//a eviter public
+        List<Block> result = new ArrayList<Block>();
+        
+        var optSchedule = order.toSchedule();
+        if (optSchedule.isEmpty()) {
+            throw new RuntimeException("I was given an invalid resource order");
+        }
+        Schedule schedule = optSchedule.get();
+        List<Task> criticalPath = schedule.criticalPath();
+
+
+        if (criticalPath.size() > 1){
+            int start = 0;
+            Task lastTask = criticalPath.get(0);
+            int lastMachine = order.instance.machine(lastTask);
+            for (int i = 1; i < criticalPath.size(); i++){
+                if (order.instance.machine(criticalPath.get(i)) != lastMachine) { 
+                    if (start < i-1){
+                        result.add(new Block(lastMachine, start, i - 1));  
+                    }                    
+                
+                    start = i;
+                    lastTask = criticalPath.get(i);
+                    lastMachine = order.instance.machine(lastTask);                    
+                }                
+            }
+            if (order.instance.machine(criticalPath.get(criticalPath.size()-1)) == lastMachine){
+                result.add(new Block(lastMachine, start, criticalPath.size() - 1));  
+            }
+        }
+        return result;
     }
 
     /** For a given block, return the possible swaps for the Nowicki and Smutnicki neighborhood */
     List<Swap> neighbors(Block block) {
-        throw new UnsupportedOperationException();
+        List<Swap> result = new ArrayList<Swap>();
+        if (block.lastTask - block.firstTask > 1) {
+            for (int i = 0 ; i < block.lastTask ; i++){
+                result.add(new Swap(block.machine, i, i+1));
+            }
+        } else {
+            result.add(new Swap(block.machine, block.firstTask, block.lastTask));
+        }
+    
+        return result;
     }
 
 }
