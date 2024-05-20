@@ -2,6 +2,7 @@ package jobshop.solvers;
 
 import jobshop.Instance;
 import jobshop.encodings.Schedule;
+import jobshop.solvers.neighborhood.Nowicki;
 
 import java.util.Optional;
 
